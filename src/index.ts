@@ -8,13 +8,17 @@ const client = new SapphireClient({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
 });
 
-const job = new CronJob('0 17 * * *', () => {
-    const channel = client.channels.cache.get('1136523488560160778')!;
-    if (!(channel instanceof TextChannel)) return;
-    channel.messages.cache.forEach(message => {
-        message.delete();
-    })
-})
+const job = new CronJob(
+    '0 5 * * *', 
+    async () => {
+        const channel = client.channels.cache.get('1136523488560160778')!;
+        if (!(channel instanceof TextChannel)) return;
+        await channel.bulkDelete(999);
+    },
+    null,
+    true,
+    'Australia/Brisbane'
+);
 
 job.start();
 client.login(process.env.TOKEN);
