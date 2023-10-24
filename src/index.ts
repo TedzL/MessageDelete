@@ -9,11 +9,11 @@ const client = new SapphireClient({
 });
 
 const job = new CronJob(
-    '0 5 * * *', 
+    '0 4 * * *', 
     async () => {
         const channel = client.channels.cache.get('1136523488560160778')!;
         if (!(channel instanceof TextChannel)) return;
-        await channel.bulkDelete(999);
+        await channel.bulkDelete(99);
     },
     null,
     true,
